@@ -4,7 +4,6 @@ require './lib/hospital'
 require './lib/network'
 
 RSpec.describe do Network
-
   before :each do
     @gsmn = Network.new("Greater Seattle Medical Network")
 
