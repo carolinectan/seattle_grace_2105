@@ -20,5 +20,4 @@ class Hospital
   def specialties
     @doctors.flat_map { |doctor| doctor.specialty }
   end
-
 end
