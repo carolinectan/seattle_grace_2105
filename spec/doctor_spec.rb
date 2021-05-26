@@ -1,7 +1,6 @@
 require 'rspec'
 require './lib/doctor'
 
-
 RSpec.describe do Doctor
 
   before :each do
@@ -20,9 +19,4 @@ RSpec.describe do Doctor
     expect(@meredith.education).to eq("Harvard University")
     expect(@meredith.salary).to eq(100000)
   end
-
-
-
-
-
 end
