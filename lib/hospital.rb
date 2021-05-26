@@ -10,14 +10,40 @@ class Hospital
   end
 
   def total_salary
-    (@doctors.flat_map { |doctor| doctor.salary }).sum
+    @doctors.map do |doctor|
+      doctor.salary
+    end.sum
+
+    # total = 0
+    # @doctors.each do |doctor|
+    #   total += doctor.salary
+    # end
+    # total
+
+    # @doctors.sum do |doctor|
+    #   doctor.salary
+    # end
   end
 
   def lowest_paid_doctor
-    @doctors.min_by { |doctor| doctor.salary }.name
+    @doctors.min_by do |doctor|
+      doctor.salary
+    end.name
+
+    # lowest_doctor = @doctors[0]
+    # @doctors.each do |doctor|
+    #  if doctor.salary < lowest_doctor.salary
+    #    lowest_doctor = doctor
+    #  end
+    # end
+    # lowest_doctor.name
   end
 
+  # what if >1 doctor have the same specialties
   def specialties
-    @doctors.flat_map { |doctor| doctor.specialty }
+    @doctors.map do |doctor|
+      doctor.specialty
+    end
   end
+
 end
