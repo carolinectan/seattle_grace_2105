@@ -3,7 +3,7 @@ require './lib/doctor'
 require './lib/hospital'
 require './lib/network'
 
-RSpec.describe do Network
+RSpec.describe Network do
   before :each do
     @gsmn = Network.new("Greater Seattle Medical Network")
 
@@ -36,36 +36,43 @@ RSpec.describe do Network
     @grey_sloan = Hospital.new("Grey Sloan Memorial", "Larry Maxwell", [@miranda, @derek])
   end
 
-  it "exists" do
-    expect(@gsmn).to be_an_instance_of(Network)
-    expect(@gsmn.name).to eq("Greater Seattle Medical Network")
-    expect(@gsmn.hospitals).to eq([])
+  describe "instantiation" do
+    it "exists" do
+      expect(@gsmn).to be_an_instance_of(Network)
+    end
+
+    it "has attributes on instantiation" do
+      expect(@gsmn.name).to eq("Greater Seattle Medical Network")
+      expect(@gsmn.hospitals).to eq([])
+    end
   end
 
-  it "can add hospitals to network" do
-    @gsmn.add_hospital(@seattle_grace)
-    @gsmn.add_hospital(@grey_sloan)
+  describe "methods" do
+    it "can add a hospital to network" do
+      @gsmn.add_hospital(@seattle_grace)
+      @gsmn.add_hospital(@grey_sloan)
 
-    expect(@gsmn.hospitals).to eq([@seattle_grace, @grey_sloan])
-  end
+      expect(@gsmn.hospitals).to eq([@seattle_grace, @grey_sloan])
+    end
 
-  it "has a highest paid doctor" do
-    @gsmn.add_hospital(@seattle_grace)
-    @gsmn.add_hospital(@grey_sloan)
+    it "can find the highest paid doctor in the network" do
+      @gsmn.add_hospital(@seattle_grace)
+      @gsmn.add_hospital(@grey_sloan)
 
-    expect(@gsmn.hospitals).to eq([@seattle_grace, @grey_sloan])
-    expect(@gsmn.highest_paid_doctor).to eq(@miranda)
-  end
+      expect(@gsmn.hospitals).to eq([@seattle_grace, @grey_sloan])
+      expect(@gsmn.highest_paid_doctor).to eq(@miranda)
+    end
 
-  it "can sort doctors by hospital" do
-    @gsmn.add_hospital(@seattle_grace)
-    @gsmn.add_hospital(@grey_sloan)
+    it "can group doctors by hospital" do
+      @gsmn.add_hospital(@seattle_grace)
+      @gsmn.add_hospital(@grey_sloan)
 
-    expect(@gsmn.hospitals).to eq([@seattle_grace, @grey_sloan])
-    # expect(@gsmn.doctors_by_hospital).to be_a(Hash)
-    expect(@gsmn.doctors_by_hospital).to eq({
-      @seattle_grace => ["Meredith Grey", "Alex Karev"],
-      @grey_sloan => ["Miranda Bailey", "Derek Sheperd"]
-      })
+      expect(@gsmn.hospitals).to eq([@seattle_grace, @grey_sloan])
+      expect(@gsmn.doctors_by_hospital).to be_a(Hash)
+      expect(@gsmn.doctors_by_hospital).to eq({
+        @seattle_grace => ["Meredith Grey", "Alex Karev"],
+        @grey_sloan => ["Miranda Bailey", "Derek Sheperd"]
+        })
+    end
   end
 end
