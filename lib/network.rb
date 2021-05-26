@@ -16,11 +16,11 @@ class Network
   end
 
   def doctors_by_hospital
-    doctors_by_hospital = Hash.new { |key, value| hash[key] = [] }
+    doctors_by_hospital = Hash.new #{ |key, value| hash[key] = [] }
 
     @hospitals.select do |hospital|
-      hospital.doctors.select do |hospital, doctor|
-        doctors_by_hospital[hospital] << doctor.name
+      hospital.doctors.select do |doctor|
+        doctors_by_hospital[hospital] = doctor.name
       end
     end
   end
