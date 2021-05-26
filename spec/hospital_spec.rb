@@ -3,7 +3,6 @@ require './lib/doctor'
 require './lib/hospital'
 
 RSpec.describe do Doctor
-
   before :each do
     @meredith = Doctor.new({
       name: "Meredith Grey",
